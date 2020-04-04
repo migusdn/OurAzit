@@ -78,7 +78,10 @@ public class AppController {
 		return "mypage";
 		
 	}
-
+	@RequestMapping("/Onedrive")
+	public String Onedrive(Model model, HttpServletRequest request) {
+		return "Onedrive";
+	}
 	@RequestMapping("/search")
 	public String search(Model model) {
 		logger.info("Welcome Index Page");
@@ -107,5 +110,20 @@ public class AppController {
 	public String register_type(Model model) {
 		logger.info("Welcome Index Page");
 		return "register_type";
+	}
+	@RequestMapping("/test")
+	public String test(Model model) {
+		logger.info("test");
+		return "test";
+	}
+	@RequestMapping("/ctest")
+	public String ctest(Model model) {
+		logger.info("ctest");
+		return "croptest";
+	}
+	@RequestMapping("/utest")
+	public String utest(Model model) {
+		logger.info("ctest");
+		return "uploadtest";
 	}
 }

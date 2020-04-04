@@ -8,17 +8,38 @@
 -->
 <html>
 <head>
-<title>Poem Platform</title>
+<title>OurAzit</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<link rel="stylesheet" href="assets/css/main.css" />
-<script src="assets/js/jquery.min.js"></script>
-<script src="ckeditor/ckeditor.js"></script>
-<script src="assets/js/spectrum.js"></script>
-<link rel="stylesheet" href="assets/css/spectrum.css" />
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="/assets/css/main.css" />
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/ckeditor/ckeditor.js"></script>
+<script src="/assets/js/spectrum.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/assets/css/spectrum.css" />
 <style>
 .filebox label {
 	display: inline-block;
@@ -51,7 +72,7 @@
 		encType="multipart">
 		<!-- Header -->
 		<header id="header">
-			<a class="logo" href="index.html">시 쓰기 플랫폼</a>
+			<a class="logo" href="index.html">OurAzit</a>
 
 			<nav>
 				<input type="hidden" name="post_background" id="bg_color" value="#000000">
@@ -59,17 +80,6 @@
 			</nav>
 
 		</header>
-
-		<!-- Banner
-    <section id="banner">
-        <div class="inner">
-            <h1>시 창작 플랫폼</h1>
-            <p>A responsive business oriented template with a video background<br />
-            designed by <a href="https://templated.co/">TEMPLATED</a> and released under the Creative Commons License.</p>
-        </div>
-        <video autoplay loop muted playsinline src="images/banner.mp4"></video>
-    </section>
--->
 
 		<input type="hidden" name="user_id" value="${sessionScope.user_id }">
 		<input type="text" class="form-control" id="post_title"
@@ -81,10 +91,7 @@
 	<button id="write" style="width: 49%; display: inline-block;">게시하기</button>
 	<button onclick="button1_click();"
 		style="width: 49%; display: inline-block;">확인용</button>
-	<div>
-		<h2>미리보기</h2>
-		<img id="img" />
-	</div>
+	
 
 
 	<script>
@@ -123,13 +130,13 @@
 										.getData();
 								var formData = new FormData(form);
 								$.ajax({
-									url : '/app/postWrite',
+									url : '/postWrite',
 									processData : false,
 									contentType : false,
 									data : formData,
 									type : 'POST',
 									success : function(result) {
-										location.href = "/app";
+										location.href = "/";
 									}
 								});
 							});
@@ -141,10 +148,10 @@
 			height : 280
 		});
 		//데이터 세팅부분 수정시 파싱후 데이터 수정
-		CKEDITOR.instances.p_content.setData('<p>Some other editor data.</p>',
+		/* CKEDITOR.instances.p_content.setData('<p>Some other editor data.</p>',
 				function() {
 					this.checkDirty(); // true
-				});
+				}); */
 	</script>
 	<!-- Testimonials -->
 
@@ -186,28 +193,28 @@
 
 	<!-- Footer -->
 	<footer id="footer">
-		<div class="MenuIcon" onclick="location.href='/app/';">
+		<div class="MenuIcon" onclick="location.href='/';">
 			<i class="fas fa-home"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='search';">
+		<div class="MenuIcon" onclick="location.href='/search';">
 			<i class="fas fa-search"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='add';">
+		<div class="MenuIcon" onclick="location.href='/add';">
 			<i class="far fa-plus-square" style="color: #444444;"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='follow';">
+		<div class="MenuIcon" onclick="location.href='/follow';">
 			<i class="fas fa-heart"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='mypage';">
+		<div class="MenuIcon" onclick="location.href='/mypage';">
 			<i class="fas fa-user"></i>
 		</div>
 	</footer>
 
 	<!-- Scripts -->
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/fontawesome.js" crossorigin="anonymous"></script>
+	<script src="/assets/js/browser.min.js"></script>
+	<script src="/assets/js/breakpoints.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<script src="/assets/js/main.js"></script>
+	<script src="/assets/js/fontawesome.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -45,10 +45,17 @@
 		post_id=#{post_id}
 	</select>
 	<select id="post_detail" resultType="com.syu.app.Dto.PostDto">
-		SELECT *
-		FROM post
+		SELECT p.*,
+		(select count(*) from post_like where post_id
+		= p.post_id) as post_like
+		FROM post p
 		WHERE
 		post_id=#{post_id}
+	</select>
+	<select id="like_detail" parameterType="map" resultType="com.syu.app.Dto.LikeDto">
+		SELECT * 
+		FROM post_like
+		where user_id = #{user_id} AND post_id = #{post_id}
 	</select>
 
 	<insert id="like" parameterType="map">

@@ -57,4 +57,10 @@ public class PostDao implements PDao{
 		return null;
 	}
 
+	@Override
+	public LikeDto like_detail(Map map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

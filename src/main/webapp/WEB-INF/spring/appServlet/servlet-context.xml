@@ -15,6 +15,7 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	
 	<resources location="/resources/assets/css/" mapping="/assets/css/**"></resources>
+	<resources location="/resources/assets/favicon/" mapping="/assets/favicon/**"></resources>
 	<resources location="/resources/assets/js/" mapping="/assets/js/**"></resources>
 	<resources location="/resources/assets/icon/" mapping="/assets/icon/**"></resources>
 	<resources location="/resources/assets/sass/" mapping="/assets/sass/**"></resources>

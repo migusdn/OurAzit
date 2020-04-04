@@ -60,7 +60,7 @@ $(function(){
                 user_type:$("#user_type").val()
         }
         $.ajax({
-            url: '/app/Regis_Act',
+            url: '/Regis_Act',
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'text/plain; charset=utf-8',
@@ -68,7 +68,7 @@ $(function(){
             	alert(response);
                 if(response == 1){
                     alert('가입 완료');
-                    location.replace('/app/'); // 화면 갱신
+                    location.replace('/'); // 화면 갱신
                 } else if(response == 0){
                     alert('이미 가입된 아이디입니다');
                 } else if(response == -2){

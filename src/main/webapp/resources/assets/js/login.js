@@ -1,5 +1,5 @@
-
-$(function(){
+$(function login(){
+	
     // 회원 가입 처리
     $('#login').click(function(e){
         if($("#user_id").val() ==''){
@@ -19,7 +19,7 @@ $(function(){
                 user_password:$('#user_password').val()
         }
         $.ajax({
-            url: '/app/Login_Act',
+            url: '/Login_Act',
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'text/plain; charset=utf-8',
@@ -27,13 +27,9 @@ $(function(){
             	alert(response);
                 if(response == 1){
                     alert('로그인 성공');
-                    location.replace('/app/'); // 화면 갱신
-                } else if(response == 0){
-                    alert('이미 가입된 아이디입니다');
-                } else if(response == -2){
-                    alert('입력된 값이 없습니다');
+                    location.replace('/'); // 화면 갱신
                 } else {
-                    alert('등록중에 에러가 발생했습니다');
+                    alert('아이디와 비밀번호를 확인해주세요');
                 }
             },
             error: function(jqXHR, textStatus, errorThrown){

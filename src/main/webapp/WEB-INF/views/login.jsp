@@ -8,27 +8,52 @@
 -->
 <html>
 <head>
-<title>Poem Platform</title>
+<title>OurAzit</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="assets/css/main.css" />
 <script src="assets/js/facebook.js"></script>
 <script src="assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript">
+function onEnterLogin(){
+	$("#nameTest").keypress(function (e) {
+        if (e.which == 13){
+                   console.log('test');  // 실행할 이벤트
+        }
+    });
+}
+
+</script>
 </head>
 <body class="is-preload">
 
 	<!-- Header -->
 	<header id="header">
-		<a class="logo" href="index.html">시 쓰기 플랫폼</a>
-
-		<nav>
-			<a href="#menu">릴레이 시 쓰기</a>
-		</nav>
+		<i class="fas fa-camera"></i>
+		<a class="logo" href="index.html">OurAzit</a>
+		<i class="fas fa-paper-plane"></i>
 	</header>
 
 	<!-- Banner
@@ -93,19 +118,19 @@
 	</section>
 	<!-- Footer -->
 	<footer id="footer">
-		<div class="MenuIcon" onclick="location.href='/app/';">
+		<div class="MenuIcon" onclick="location.href='/';">
 			<i class="fas fa-home"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='search';">
+		<div class="MenuIcon" onclick="location.href='/search';">
 			<i class="fas fa-search"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='add';">
+		<div class="MenuIcon" onclick="location.href='/add';">
 			<i class="far fa-plus-square"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='follow';">
+		<div class="MenuIcon" onclick="location.href='/follow';">
 			<i class="fas fa-heart"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='mypage';">
+		<div class="MenuIcon" onclick="location.href='/mypage';">
 			<i class="fas fa-user" style="color: #444444;"></i>
 		</div>
 	</footer>
@@ -114,7 +139,7 @@
 	<script type="text/javascript">
   	var naver_id_login = new naver_id_login("8tx_pBAlod4OIxq2dlgB", "http://migusdn.cafe24.com/app/N_callback");
   	var state = naver_id_login.getUniqState();
-  	naver_id_login.setDomain("http://migusdn.cafe24.com/");
+  	naver_id_login.setDomain("http://www.ourazit.com/");
   	naver_id_login.setState(state);
   	naver_id_login.init_naver_id_login();
     //<![CDATA[
@@ -136,7 +161,7 @@
                  console.log(userEmail);
                  console.log(userNickName);
                  $.ajax({
-             	    url: '/app/N_Login',
+             	    url: '/N_Login',
              	    type: 'POST',
              	    dataType: 'text', //서버로부터 내가 받는 데이터의 타입
              	    contentType : 'text/plain; charset=utf-8;',//내가 서버로 보내는 데이터의 타입
@@ -146,7 +171,7 @@
              	    	//alert(data);
              	         if(data == 0){
              	         console.log("Login Success");
-             	         location.href="/app/";
+             	         location.href="/";
              	         }else{
              	        	 
              	         	console.log("카카오로 회원가입 진행");
@@ -154,7 +179,7 @@
              	         	var form = document.createElement("form");
              	         	form.setAttribute("charset", "UTF-8");
              	            form.setAttribute("method", "Post");  //Post 방식
-             	            form.setAttribute("action", "/app/register/kakao"); //요청 보낼 주소	
+             	            form.setAttribute("action", "/register/kakao"); //요청 보낼 주소	
              	            var user_name = document.createElement("input");
              	            user_name.setAttribute("type", "hidden");
              	            user_name.setAttribute("name", "user_name");
@@ -195,7 +220,7 @@
           }
         });
       };
-    //]]>
+      
   </script>
 	<script src="assets/js/browser.min.js"></script>
 	<script src="assets/js/breakpoints.min.js"></script>

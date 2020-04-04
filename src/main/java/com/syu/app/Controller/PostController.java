@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.syu.app.Dao.PDao;
+import com.syu.app.Dto.LikeDto;
 import com.syu.app.Dto.PostDto;
 import com.syu.app.Dto.ReplyDto;
 
@@ -100,10 +101,18 @@ public class PostController {
 		return "1";
 	}
 	@RequestMapping("/post/{post_id}")
-	public String bbs_detail(@PathVariable String post_id, Model model) {
+	public String bbs_detail(@PathVariable String post_id, Model model, HttpSession session) {
 		PDao dao = sqlSession.getMapper(PDao.class);
 		PostDto PDto = dao.post_detail(post_id);
 		ArrayList<ReplyDto> RList = dao.reply_view(post_id);
+		Map map = new HashMap();
+		map.put("user_id", session.getAttribute("user_id"));
+		map.put("post_id", post_id);
+		LikeDto LDto = dao.like_detail(map);
+		if(LDto == null)
+			model.addAttribute("like", "false");
+		else
+			model.addAttribute("like", "true");
 		String json = new Gson().toJson(RList);
 		System.out.println(json);
 		model.addAttribute("reply",json);

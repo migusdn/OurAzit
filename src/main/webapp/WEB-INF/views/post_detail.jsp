@@ -9,16 +9,33 @@
 -->
 <html>
 <head>
-<title>Poem Platform</title>
+<title>OurAzit</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<link rel="stylesheet" href="/app/assets/css/main.css" />
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="/assets/css/main.css" />
 
-<script src="/app/assets/js/jquery.min.js"></script>
-<script src="/app/assets/js/color.js"></script>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/color.js"></script>
 <style>
 #productBeforeList {
 	height: 600px;
@@ -50,7 +67,7 @@
 
 	<!-- Header -->
 	<header id="header">
-		<a class="logo" href="index.html">시 쓰기 플랫폼</a>
+		<a class="logo" href="index.html">OurAzit</a>
 
 		<nav>
 			<a href="#menu">릴레이 시 쓰기</a>
@@ -79,7 +96,7 @@
 							</blockquote>
 							<div class="author">
 								<div class="image">
-									<img src="/app/images/pic01.jpg" alt="" />
+									<img src="/images/pic01.jpg" alt="" />
 								</div>
 								<div>
 									<strong><c:out value="${post.user_id }" /></strong>
@@ -100,8 +117,8 @@
 						
 						<div id="like" style="margin-right: 10px;">
 							<i class="fas fa-heart"
-								style="font-size: 230%; margin-left: 10px; color: #bbbbbb; cursor:pointer;"></i>
-							<i><c:out value="${post.post_like}"/></i>
+								style="font-size: 230%; margin-left: 10px; color: #bbbbbb; cursor:pointer;" id="postlike" authorid="${post.user_id }" postid="${post.post_id }" like='0'></i>
+							<i class="like_ctn"><c:out value="${post.post_like}"/></i>
 						</div>
 						<div class="reply_view" id="load"
 							style="margin-left: 10px; margin-right: 10px;">
@@ -112,6 +129,67 @@
 		</section>
 	</div>
 	<script>
+	$(document).ready(function(){
+		var like = ${like};
+		console.log(like);
+		console.log($('#postlike').attr('like'));
+		if(like == true){
+			$("#postlike").attr('like','1');
+			$('#postlike').css('color', '#e84135');
+			console.log($('#postlike').attr('like'));
+				
+		}
+		else
+			console.log("false");
+			
+	});
+	$(document).on('click', '#postlike',function() {
+		console.log('like click');
+		var post_id = $(this).attr('postid');
+		var author_id = $(this).attr('authorid');
+		var user_id = "${sessionScope.user_id}";
+		var like = $(this);
+		var like_ctn = like.parent().children('.like_ctn');
+		var like_ctn_val = parseInt(like.parent().children('.like_ctn').text());
+		if (user_id.length != 0) {
+			var data = {
+				'post_id' : post_id,
+				'like_type' : like.attr('like'),
+				'user_id' : user_id,
+				'author_id': author_id
+			};
+			$.ajax({
+				url : "/post_like",
+				type : "POST",
+				data : JSON.stringify(data),
+				contentType : 'application/json; charset=utf-8;',
+				dataType : "json",
+				success : function(result) {
+					if(result=='-1')
+						alert('잘못된 접근');
+					else{
+						if(like.attr('like') == "0"){
+							like.css('color','#e84135');
+							like.attr('like', '1');
+							like_ctn_val = like_ctn_val + 1;
+							like_ctn.text(like_ctn_val);
+						}
+						else{
+							like.css('color','#bbbbbb');
+							like.attr('like', '0');
+							like_ctn_val = like_ctn_val - 1;
+							like_ctn.text(like_ctn_val);
+						}
+					}
+				}
+			});
+		} else if (user_id.length == '0'){
+			alert('로그인이 필요합니다.');
+			location.href='/mypage';
+		}
+
+	    event.stopPropagation();
+	});
 	$(document).ready(function(){
 		//alert(${PList});
 	$.each(${reply}, function(index, vo){
@@ -141,19 +219,19 @@
 	</script>
 	<!-- Footer -->
 	<footer id="footer">
-		<div class="MenuIcon" onclick="location.href='/app/';">
+		<div class="MenuIcon" onclick="location.href='/';">
 			<i class="fas fa-home" style="color: #444444;"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='/app/search';">
+		<div class="MenuIcon" onclick="location.href='/search';">
 			<i class="fas fa-search"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='/app/add';">
+		<div class="MenuIcon" onclick="location.href='/add';">
 			<i class="far fa-plus-square"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='/app/follow';">
+		<div class="MenuIcon" onclick="location.href='/follow';">
 			<i class="fas fa-heart"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='/app/mypage';">
+		<div class="MenuIcon" onclick="location.href='/mypage';">
 			<i class="fas fa-user"></i>
 		</div>
 	</footer>
@@ -170,7 +248,7 @@
 				};
 				reply_content.val("");
 				$.ajax({
-					url : "/app/reply",
+					url : "/reply",
 					type : "POST",
 					data : JSON.stringify(data),
 					contentType : 'application/json; charset=utf-8;',
@@ -201,10 +279,10 @@
 		});
 	</script>
 	<!-- Scripts -->
-	<script src="/app/assets/js/browser.min.js"></script>
-	<script src="/app/assets/js/breakpoints.min.js"></script>
-	<script src="/app/assets/js/util.js"></script>
-	<script src="/app/assets/js/main.js"></script>
-	<script src="/app/assets/js/fontawesome.js" crossorigin="anonymous"></script>
+	<script src="/assets/js/browser.min.js"></script>
+	<script src="/assets/js/breakpoints.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<script src="/assets/js/main.js"></script>
+	<script src="/assets/js/fontawesome.js" crossorigin="anonymous"></script>
 </body>
 </html>

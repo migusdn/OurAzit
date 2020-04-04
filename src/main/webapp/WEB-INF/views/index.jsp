@@ -9,16 +9,40 @@
 -->
 <html>
 <head>
-<title>Poem Platform</title>
-<meta charset="utf-8" />
+<title>OurAzit</title>
+<!-- <link rel="manifest" href="/assets/favicon/manifest.json">
+ --><meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
 
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/color.js"></script>
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+<link rel="stylesheet" href="/assets/css/main.css" />
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/color.js"></script>
+
+
+<meta charset="utf-8" />
 <style>
 #productBeforeList {
 	height: 600px;
@@ -50,11 +74,9 @@
 
 	<!-- Header -->
 	<header id="header">
-		<a class="logo" href="index.html">시 쓰기 플랫폼</a>
-
-		<nav>
-			<a href="#menu">릴레이 시 쓰기</a>
-		</nav>
+		<i class="fas fa-camera"></i>
+		<a class="logo" href="index.html">OurAzit</a>
+		<i class="fas fa-paper-plane"></i>
 	</header>
 
 	<!-- Banner
@@ -71,37 +93,165 @@
 		<section class="wrapper" style="padding-top:0;">
 			<div class="inner">
 				<div class="testimonials" id="load">
-					<%-- <c:forEach var="post" items="${post}">
-						<section style="padding-bottom: 0" postid='<c:out value="${post.post_id }"/>' class="post">
-							<div class="content"
-								style="margin-bottom:0;background-color: <c:out value='${post.post_background} '/>">
-								<blockquote>
-									<c:out value="${post.post_content }" escapeXml="false" />
-								</blockquote>
-								<div class="author" userid='<c:out value="${post.user_id }"></c:out>'>
-									<div class="image">
-										<img src="images/pic01.jpg" alt="" />
-									</div>
-									<div>
-										<strong><c:out value="${post.user_id }" /></strong>
-									</div>
+					<section style="padding-bottom: 0" postid="48" class="post">
+						<div class="content">
+							<div class="author" userid="migusdn">
+								<div class="image">
+									<img src="images/pic01.jpg" alt="">
+								</div>
+								<div>
+								<strong>migusdn</strong>
 								</div>
 							</div>
-						</section>
-						<div class="content" style="background-color: white">
+							<div class="swiper-container">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+								</div>
+    					<!-- Add Pagination -->
+    							<div class="swiper-pagination"></div>
+  							</div>
+  							<div id="like">
+								<i class="fas fa-heart" id="postlike" authorid="migusdn" postid="48" like="0" aria-hidden="true">
+								</i>
+								<p>좋아요</p>
+								<i class="like_ctn">1</i>	
+							</div>
+  							<div class="post_contents" style="margin: 0 1.25rem; color:white;">ㄱ모링</div>
 							<div id="reply_area">
-								<input type="text" id="reply_content" placeholder="덧글달기"
-									style="margin-left: 10px; margin-right: 10px; width: 70%; margin-bottom: 10px; display: inline-block;">
-								<button id="reply" class="reply"
-									postid='<c:out value="${post.post_id }"></c:out>'>확인</button>
+								<input type="text" id="reply_content" placeholder="댓글 달기..." style=" width: 70%; display: inline-block;">
+								<button id="reply" class="reply" postid="48" >확인</button>
 							</div>
-							<div id="like" style="margin-right: 10px;">
-								<i class="fas fa-heart" id="postlike" postid='<c:out value="${post.post_id }"/>' authorid='<c:out value="${post.user_id }"></c:out>'
-									style="font-size: 230%; margin-left: 10px; color: #bbbbbb; cursor: pointer;" like="0"></i>
-								<i class="like_ctn"><c:out value="${post.post_like}"/></i>
-							</div>
+							
 						</div>
-					</c:forEach> --%>
+					</section>
+					<section style="padding-bottom: 0" postid="48" class="post">
+						<div class="content">
+							<div class="author" userid="migusdn">
+								<div class="image">
+									<img src="images/pic01.jpg" alt="">
+								</div>
+								<div>
+								<strong>migusdn</strong>
+								</div>
+							</div>
+							<div class="swiper-container">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+								</div>
+    					<!-- Add Pagination -->
+    							<div class="swiper-pagination"></div>
+  							</div>
+  							<div id="like">
+								<i class="fas fa-heart" id="postlike" authorid="migusdn" postid="48" like="0" aria-hidden="true">
+								</i>
+								<i class="like_ctn">1</i>	
+							</div>
+							<div id="reply_area">
+								<input type="text" id="reply_content" placeholder="댓글 달기..." style=" width: 70%; display: inline-block;">
+								<button id="reply" class="reply" postid="48" >확인</button>
+							</div>
+							
+						</div>
+					</section>
+					<section style="padding-bottom: 0" postid="48" class="post">
+						<div class="content">
+							<div class="author" userid="migusdn">
+								<div class="image">
+									<img src="images/pic01.jpg" alt="">
+								</div>
+								<div>
+								<strong>migusdn</strong>
+								</div>
+							</div>
+							<div class="swiper-container">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+								</div>
+    					<!-- Add Pagination -->
+    							<div class="swiper-pagination"></div>
+  							</div>
+  							<div id="like">
+								<i class="fas fa-heart" id="postlike" authorid="migusdn" postid="48" like="0" aria-hidden="true">
+								</i>
+								<i class="like_ctn">1</i>	
+							</div>
+							<div id="reply_area">
+								<input type="text" id="reply_content" placeholder="댓글 달기..." style=" width: 70%; display: inline-block;">
+								<button id="reply" class="reply" postid="48" >확인</button>
+							</div>
+							
+						</div>
+					</section>
+					<section style="padding-bottom: 0" postid="48" class="post">
+						<div class="content">
+							<div class="author" userid="migusdn">
+								<div class="image">
+									<img src="images/pic01.jpg" alt="">
+								</div>
+								<div>
+								<strong>migusdn</strong>
+								</div>
+							</div>
+							<div class="swiper-container">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+									<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>
+										
+								</div>
+    					<!-- Add Pagination -->
+    							<div class="swiper-pagination"></div>
+  							</div>
+  							<div id="like">
+								<i class="fas fa-heart" id="postlike" authorid="migusdn" postid="48" like="0" aria-hidden="true">
+								</i>
+								<i class="like_ctn">1</i>	
+							</div>
+							<div id="reply_area">
+								<input type="text" id="reply_content" placeholder="댓글 달기..." style=" width: 70%; display: inline-block;">
+								<button id="reply" class="reply" postid="48" >확인</button>
+							</div>
+							
+						</div>
+					</section>
+					
+					
+					<script>
+	var options = {
+			
+		      pagination: {
+		          el: '.swiper-pagination',
+		          dynamicBullets: true,
+		          init: true,
+		        }
+		      }
+    var swiper = new Swiper('.swiper-container', options);
+  </script>
+					
+					
+					
+					
+					
+					
+					
+					
 				</div>
 			</div>
 		</section>
@@ -109,19 +259,19 @@
 	<input type="hidden" id="startNo" value="0">
 	<!-- Footer -->
 	<footer id="footer">
-		<div class="MenuIcon" onclick="location.href='/app/';">
+		<div class="MenuIcon" onclick="location.href='/';">
 			<i class="fas fa-home" style="color: #444444;"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='search';">
+		<div class="MenuIcon" onclick="location.href='/search';">
 			<i class="fas fa-search"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='add';">
+		<div class="MenuIcon" onclick="location.href='/add';">
 			<i class="far fa-plus-square"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='follow';">
+		<div class="MenuIcon" onclick="location.href='/follow';">
 			<i class="fas fa-heart"></i>
 		</div>
-		<div class="MenuIcon" onclick="location.href='mypage';">
+		<div class="MenuIcon" onclick="location.href='/mypage';">
 			<i class="fas fa-user"></i>
 		</div>
 	</footer>
@@ -155,12 +305,14 @@
 			else
 				alert('덧글을 입력해주세요');
 			// your function here
+			
+			
 		});
 	
-		$(document).on('click', '.post', function () {
+		/* $(document).on('click', '.post', function () {
 		    var post_id = $(this).attr('postid');
 			location.href='post/'+post_id;
-		});
+		}); */
 		$(document).on('click', '.author',function () {
 		    var user_id = $(this).attr('userid');
 		    alert('author click');
@@ -208,10 +360,9 @@
 				});
 			} else if (user_id.length == '0'){
 				alert('로그인이 필요합니다.');
-				location.href='mypage';
+				location.href='/mypage';
 			}
-
-		    event.stopPropagation();
+			
 		});
 		let isEnd = false;
 		$(function() {
@@ -231,7 +382,6 @@
 							fetchList();
 						}
 					})
-			fetchList();
 		})
 
 		let fetchList = function() {
@@ -241,7 +391,7 @@
 
 			let startNo = $("#startNo").val();
 			$.ajax({
-				url : "postfetch",
+				url : "/postfetch",
 				type : "POST",
 				data : startNo,
 				contentType : 'text/plain; charset=utf-8;',
@@ -257,18 +407,17 @@
 					$.each(result.post, function(index, vo) {
 						renderList(false, vo);
 					})
+				    var swiper = new Swiper('.swiper'+$("#startNo").val(), options);
 				}
 			});
+			
 		}
 
 		let renderList = function(mode, vo) {
 			// 리스트 html을 정의
 			let html = ""
 			html += '<section style="padding-bottom: 0"postid="'+vo.post_id+'" class="post">';
-			html += '<div class="content" style="background-color:'+vo.post_background+'">';
-			html += '<blockquote>';
-			html += vo.post_content;
-			html += '</blockquote>';
+			html += '<div class="content">';
 			html += '<div class="author" userid="'+vo.user_id+'">';
 			html += '<div class="image">';
 			html += '<img src="images/pic01.jpg" alt="" />'
@@ -276,19 +425,23 @@
 			html += '<strong>'
 			html += vo.user_id;
 			html += '</strong>';
-			html += '</div></div></div></section>';
-			html += '<div class="content" style="background-color: white">';
-			html += '<div id="reply_area">';
-			html += '<input type="text" id="reply_content" placeholder="덧글달기"';
-			html += 'style="margin-left: 10px; margin-right: 10px; width: 70%; margin-bottom: 10px; display: inline-block;">';
-			html += '<button id="reply" class="reply"';
-			html += 'postid='+vo.post_id+'>';
-			html += '확인</button>';
 			html += '</div>';
-			html += '<div id="like" style="margin-right: 10px;">';
+			html += '</div>';
+			html += '<div class="swiper-container swiper'+$("#startNo").val()+'">';
+			html += '<div class="swiper-wrapper">';
+			/* html += '<div class="swiper-slide>"'+vo.post_content+'</div>';
+			 */html += '<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>';
+			html += '<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>';
+			html += '<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>';
+			html += '<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>';
+			html += '<div class="swiper-slide"><img src="https://i.picsum.photos/id/239/700/700.jpg" style="width:100%"></div>';
+			html += '</div>';
+			html += '<div class="swiper-pagination"></div>';
+			html += '</div>';
+			html += '<div id="like">';
 			html += '<i class="fas fa-heart" id="postlike" authorid="'+vo.user_id+'"';
 			html += 'postid="'+vo.post_id+'"';
-			html += 'style="cursor: pointer; font-size: 230%; margin-left: 10px; ';
+			html += 'style="';
 			
 			if(like_check(vo.post_id)){
 				html += 'color: #e84135;"';
@@ -298,12 +451,18 @@
 				html += 'color: #bbbbbb;"';
 				html += 'like="0" ';
 			}
-			
-			
 			html += '></i>';
 			html += '<i class="like_ctn">'+vo.post_like+'</i>';
 			html += '</div>';
+			html += '<div id="reply_area">';
+			html += '<input type="text" id="reply_content" placeholder="댓글 달기..."';
+			html += 'style="width:70%; display: inline-block;">';
+			html += '<button id="reply" class="reply"';
+			html += 'postid='+vo.post_id+'>';
+			html += '확인</button>';
 			html += '</div>';
+			html += '</div>';
+			html += '</section>'
 			if (mode) {
 				$("#load").prepend(html);
 			} else {
