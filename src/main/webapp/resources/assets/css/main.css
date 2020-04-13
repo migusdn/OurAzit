@@ -165,10 +165,10 @@ em, i {
 	font-style: italic;
 }
 
-p {
+/* p {
 	margin: 0 0 2rem 0;
 }
-
+ */
 header.special {
 	text-align: center;
 	margin-bottom: 4rem;
@@ -1056,7 +1056,8 @@ table.alt tbody tr td {
 }
 
 .testimonials .content .author {
-	padding-bottom: 10px; display : -moz-flex;
+	/* padding-bottom: 10px; 
+	 */display : -moz-flex;
 	display: -webkit-flex;
 	display: -ms-flex;
 	display: flex;
@@ -1073,9 +1074,10 @@ table.alt tbody tr td {
 
 .testimonials .content .author .image {
 	margin-right: 0.5rem;
-	width: 20%;
-	padding-top: 10px;
-	padding-left: 10px;
+	/* width: 20%; */
+/* 	padding-top: 10px;
+	padding-left: 10px; */
+	padding: 0.5rem 0.5rem 0.5rem 1rem;
 }
 
 .testimonials .content .author strong {
@@ -1087,17 +1089,16 @@ table.alt tbody tr td {
 	border-radius: 100%;
 	/* max-width: 100%; 
            */
-	width: 55px;
+	width: 2.5rem;
 }
 
 .testimonials .content #like {
-	padding-top: 10px;
 }
 
 .testimonials .content #like .fas {
 	cursor: pointer;
 	font-size: 1.5rem;
-	padding: 0 1.25rem;
+	padding: 0.5rem 0.5rem 0.5rem 1rem;
 	color: #bbbbbb;
 }
 

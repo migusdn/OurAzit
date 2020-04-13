@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--
 	Industrious by TEMPLATED
@@ -11,8 +10,7 @@
 <head>
 <title>OurAzit</title>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
@@ -24,7 +22,7 @@
 <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon/apple-icon-144x144.png">
 <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon/apple-icon-152x152.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon/android-icon-192x192.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
@@ -34,6 +32,8 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="/assets/css/main.css" />
 
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/color.js"></script>
 <style>
@@ -85,51 +85,61 @@
 			</section>
  -->
 	<div id="preloadpost">
-		<section class="wrapper" style="padding-top:0;">
+		<section class="wrapper" style="padding-top: 0;">
 			<div class="inner">
 				<div class="testimonials">
-					<section style="padding-bottom: 0">
-						<div class="content"
-							style="margin-bottom:0;background-color: <c:out value='${post.post_background} '/>">
-							<blockquote>
-								<c:out value="${post.post_content }" escapeXml="false" />
-							</blockquote>
-							<div class="author">
+					<section style="padding-bottom: 0" postid="48" class="post">
+						<div class="content">
+							<div class="author" userid="migusdn">
 								<div class="image">
-									<img src="/images/pic01.jpg" alt="" />
+									<img src="/images/pic01.jpg" alt="">
 								</div>
 								<div>
 									<strong><c:out value="${post.user_id }" /></strong>
 								</div>
 							</div>
+							<div class="swiper-container">
+								<div class="swiper-wrapper">
+									
+								</div>
+								<div class="swiper-pagination"></div>
+							</div>
+							<div id="like">
+								<i class="fas fa-heart" id="postlike" authorid="migusdn" postid="48" like="0" aria-hidden="true"> </i> <i class="like_ctn">1</i>
+							</div>
+							<div id="reply_area">
+								<input type="text" id="reply_content" placeholder="댓글 달기..." style="width: 70%; display: inline-block;">
+								<button id="reply" class="reply" postid="<c:out value="${post.post_id }"/>">확인</button>
+							</div>
+
 						</div>
 					</section>
-					<div class="content" style="background-color: white">
-						<div id="reply_area">
-							<input type="text" id="reply_content" placeholder="덧글달기"
-								style="margin-left: 10px; margin-right: 10px; width: 70%; margin-bottom: 10px; display: inline-block;">
-							<button id="reply" class="reply"
-								postid="<c:out value="${post.post_id }"/>">확인</button>
-						</div>
+					<div class="content" style="background-color: white;">
 						
-						
-						
-						
-						<div id="like" style="margin-right: 10px;">
-							<i class="fas fa-heart"
-								style="font-size: 230%; margin-left: 10px; color: #bbbbbb; cursor:pointer;" id="postlike" authorid="${post.user_id }" postid="${post.post_id }" like='0'></i>
-							<i class="like_ctn"><c:out value="${post.post_like}"/></i>
-						</div>
-						<div class="reply_view" id="load"
-							style="margin-left: 10px; margin-right: 10px;">
-						</div>
+						<div class="reply_view" id="load" style="margin-left: 10px; margin-right: 10px;"></div>
 					</div>
 				</div>
-				</div>
+			</div>
 		</section>
 	</div>
 	<script>
+	var options = {
+			
+		      pagination: {
+		          el: '.swiper-pagination',
+		          dynamicBullets: true,
+		          init: true,
+		        }
+		      }
+
+    var swiper;
+  </script>
+
+	<script>
 	$(document).ready(function(){
+		let post_content = JSON.parse('<c:out value="${post.post_content }" escapeXml="false" />');
+		let contents = post_content.contents;
+		console.log(post_content);
 		var like = ${like};
 		console.log(like);
 		console.log($('#postlike').attr('like'));
@@ -141,7 +151,14 @@
 		}
 		else
 			console.log("false");
-			
+		let html = "";
+		for(var j=0; j<contents.length; j++){
+			console.log(contents[j]);
+			console.log(contents[j][0].savedPath);
+			html += '<div class="swiper-slide"><img src="http://api.ourazit.com/img'+contents[j][0].savedPath+'/'+contents[j][0].savedName+'" style="width:100%"></div>';
+		}
+		$(".swiper-wrapper").append(html);	
+		swiper = new Swiper('.swiper-container', options);
 	});
 	$(document).on('click', '#postlike',function() {
 		console.log('like click');
@@ -211,11 +228,11 @@
             $("#load").append(html);
         
     }
-	$(document).on('click', '.post', function () {
+	/* $(document).on('click', '.post', function () {
 	    var post_id = $(this).attr('postid');
 		location.href='post/'+post_id;
 	    // your function here
-	});
+	}); */
 	</script>
 	<!-- Footer -->
 	<footer id="footer">

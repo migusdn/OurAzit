@@ -1,206 +1,218 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
-<!--
-	Industrious by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>OurAzit</title>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
-<link rel="manifest" href="/assets/favicon/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="/assets/favicon/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.min.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="/assets/css/main.css" />
 <script src="/assets/js/jquery.min.js"></script>
-<script src="/ckeditor/ckeditor.js"></script>
-<script src="/assets/js/spectrum.js"></script>
 
-
-
-
-<link rel="stylesheet" href="/assets/css/spectrum.css" />
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 <style>
-.filebox label {
+.preview{
+	overflow: hidden;
+	width:33.3%;
+	height: 216px;
 	display: inline-block;
-	padding: .5em .75em;
-	color: #999;
-	font-size: inherit;
-	line-height: normal;
-	vertical-align: middle;
-	background-color: #fdfdfd;
-	cursor: pointer;
-	border: 1px solid #ebebeb;
-	border-bottom-color: #e2e2e2;
-	border-radius: .25em;
+}
+.swiper-slide{
+	width:100%;
+}
+#image{
+	max-width:100%;
+	display:block;
 }
 
-.filebox input[type="file"] { /* 파일 필드 숨기기 */
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0;
-}
 </style>
+
+
+
 </head>
 <body class="is-preload">
-	<form name="form" id="form" method="post" action="postWrite"
-		encType="multipart">
-		<!-- Header -->
-		<header id="header">
-			<a class="logo" href="index.html">OurAzit</a>
+	<!-- Header -->
+	<header id="header">
+		<i class="fas fa-camera" id="file"></i> <a class="logo" href="index.html">OurAzit</a> <i id="confirm" class="fas fa-paper-plane"></i>
+		<input multiple="multiple"type="file" accept="image/*;capture=camera" id="camera" style="display:none" accept="image/*">
+	</header>
+	<div class="wrapper">
+		<div class="preloadpoat">
+			<input type="text" id="comment" placeholder="문구 입력"style="width:100%; color:white;">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<!-- <div class="swiper-slide"style="width:100%;">
+					<img id="image" src="/images/test.jpg" style="max-width: 100%%; display: block;">
+					</div>
+					<div class="swiper-slide"style="width:100%;">
+					<img id="image" src="/images/test1.jpg" style="max-width: 100%%; display: block;">
+					</div>
+					<div class="swiper-slide"style="width:100%;">
+					<img id="image" src="/images/test.jpg" style="max-width: 100%; display: block;">
+					</div><div class="swiper-slide" style="width:100%;">
+					<img id="image" src="/images/test4.jpg" style="max-width: 100%; display: block;">
+					</div> -->
+				</div>
+				
+			</div>
+			<div class = "preview_wrapper"style="line-height: 0; display: block;">
+				<!-- <img class="" style="margin: 0; padding: 0;" src="images/img01.JPG" width="33.3%" />
+ -->
+			</div>
 
-			<nav>
-				<input type="hidden" name="post_background" id="bg_color" value="#000000">
-				<a>배경색 고르기 <input type="text" id="custom"></a>
-			</nav>
 
-		</header>
 
-		<input type="hidden" name="user_id" value="${sessionScope.user_id }">
-		<input type="text" class="form-control" id="post_title"
-			name="post_title" value="" placeholder="제목을 입력해주세요"> <input
-			type="hidden" name="post_content" id="post_content" value="">
-		<textarea class="form-control" id="p_content"></textarea>
-	</form>
 
-	<button id="write" style="width: 49%; display: inline-block;">게시하기</button>
-	<button onclick="button1_click();"
-		style="width: 49%; display: inline-block;">확인용</button>
+		</div>
+	</div>
 	
-
-
-	<script>
-		$("#custom").spectrum(
-				{
-					showPalette : true,
-					palette : [
-							[ 'white', 'blanchedalmond' ],
-							[ 'rgb(255, 128, 0);', 'hsv 100 70 50',
-									'lightyellow' ] ]
-				});
-		$(function() {
-			$("#custom").change(function() {
-				//alert($("#custom").val().toString());
-				$("#bg_color").val('#'+$("#custom").spectrum("get").toHex());
-				//alert($("#bg_color").val());
-				
-				var test = $(".cke_wysiwyg_frame").contents().find("body").css('background-color',$("#bg_color").val());
-				//test.attr('style', 'background-color: '+$("#bg_color").val()+';');
-				
-				//test.attr('style')
-				//alert(test); 
-			});
-		});
-
-	</script>
-
-
-	<script>
-		$(function() {
-			$("#write")
-					.click(
-							function() {
-								var form = $('form')[0];
-								document.getElementById("post_content").value = CKEDITOR.instances.p_content
-										.getData();
-								var formData = new FormData(form);
-								$.ajax({
-									url : '/postWrite',
-									processData : false,
-									contentType : false,
-									data : formData,
-									type : 'POST',
-									success : function(result) {
-										location.href = "/";
-									}
-								});
-							});
-		})
-	</script>
-
-	<script type="text/javascript">
-		CKEDITOR.replace('p_content', {
-			height : 280
-		});
-		//데이터 세팅부분 수정시 파싱후 데이터 수정
-		/* CKEDITOR.instances.p_content.setData('<p>Some other editor data.</p>',
-				function() {
-					this.checkDirty(); // true
-				}); */
-	</script>
-	<!-- Testimonials -->
-
-
-
-
-	<script>
-		var sel_file;
-		$(document).ready(function() {
-			$("#input_img").on("change", handleImgFileSelect);
-		});
-		function handleImgFileSelect(e) {
-			var files = e.target.files;
-			var filesArr = Array.prototype.slice.call(files);
-
-			filesArr.forEach(function(f) {
-				if (!f.type.match("image.*")) {
-					alert("이미지 파일만 지정 할 수 있습니다.");
-					return;
-				}
-				sel_file = f;
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					$("#img").attr("src", e.target.result);
-				}
-				reader.readAsDataURL(f);
-			})
+<script>
+	var device_width = window.innerWidth;
+	document.getElementById("file").addEventListener("click", function(){
+		$('#camera').click();
+	});
+	var files = [];	//upload file temp
+	var swiper;
+	var croppers = [];	//cropper objects
+	var uploadResult = []; //upload result json
+	/* file temp change */ 
+	camera.addEventListener('change', function(e) {
+		var i; 
+	    files = e.target.files; 
+	    // Do something with the image file.
+	    var html="";
+	    console.log('file length: '+files.length);
+	    for(i=0;i<files.length; i++){
+	    	html +='<div class="swiper-slide">';
+			html +='<img id="image" src="'+URL.createObjectURL(files[i])+'">';
+			html +='</div>';
+	    }
+	    console.log(html);
+	    $('.swiper-wrapper').append(html);
+	    $(".swiper-slide").css("height",device_width);
+		crop_init();
+		swiper_init();
+	});
+	/* cropper options */
+	var c_options = {
+			viewMode : 3,
+			dragMode : 'move',
+			aspectRatio : 1 / 1,
+			highlight : false,
+			background : false,
+			rotatable : false,
+			zoomOnWheel : false,
+			autoCropArea : 1,
+			cropBoxResizable : false,
+			cropBoxMovable : false,
 		}
+	/* cropper init func */
+	
+	function crop_init(){
+		var images = document.querySelectorAll('#image');
+		var length = images.length;
+		var i;
+		for(i=0; i<length; i++){
+			c_options.preview = '#preview_'+i;
+			console.log(c_options);
+			$(".preview_wrapper").append('<div class="preview" id="preview_'+i+'" page="'+i+'"></div>');
+			croppers.push(new Cropper(images[i], c_options));
+		}
+	}
+		/* 
+	
+		var cropperr = new Cropper(image, c_options); */
 	</script>
+	<script>
+	/* swiper init func */
+	function swiper_init(){
+    swiper = new Swiper('.swiper-container', {
+    	allowTouchMove:false
+    });
+	
+	}
+	/* swiper page move */
+	$(document).on('click', '.preview', function(){
+		let page_num = $(this).attr('page');
+		/* console.log(page_num); */
+		swiper.slideTo(page_num);
+	});
+	/* img file upload ext img server and post main server */
+	$(document).on('click', '#confirm', function(){
+		if(files.length == 0){
+			alert('파일을 올리세요.');
+			return;
+		}
+		var i;
+		for(i=0;i<croppers.length; i++){
 
 
+			croppers[i].getCroppedCanvas().toBlob((blob) => {
+				const formData = new FormData();
+				formData.append('file', blob);
+				$.ajax({
+					type: 'POST',
+					enctype: 'multipart/form-data',
+					url: "http://api.ourazit.com/upload",
+					data: formData,
+					processData: false,
+					contentType: false,
+					async: false,
+					success: function(result){ 
+						console.log(result);
+						uploadResult.push(result);
+					},
+					error: function(e){
+						console.log('upload fail');
+						console.log(e);
+					},
+				});
+			});
+		}
+		
+	});
+	var ajax_ctn = 0;
 
-
-
-
-
-
-
-
+	var post_content = new Object();
+	$(document).ajaxStop(function(){
+		ajax_ctn++;
+		if(ajax_ctn==files.length){
+			post_content.comment = document.getElementById('comment').value;
+			post_content.contents = uploadResult;
+			console.log(JSON.stringify(post_content));
+			const fdata = new FormData();
+			fdata.append('user_id', '${sessionScope.user_id}');
+			fdata.append('post_content', JSON.stringify(post_content));
+			fdata.append('post_title', 'testpost');
+			$.ajax({
+				url : '/postWrite',
+				processData : false,
+				contentType : false,
+				data : fdata,
+				type : 'POST',
+				success : function(result) {
+					location.href = "/";
+				}
+			});
+		}
+			
+	});
+	
+	
+  </script>
 	<!-- Footer -->
 	<footer id="footer">
 		<div class="MenuIcon" onclick="location.href='/';">
-			<i class="fas fa-home"></i>
+			<i class="fas fa-home" style="color: #444444;"></i>
 		</div>
 		<div class="MenuIcon" onclick="location.href='/search';">
 			<i class="fas fa-search"></i>
 		</div>
 		<div class="MenuIcon" onclick="location.href='/add';">
-			<i class="far fa-plus-square" style="color: #444444;"></i>
+			<i class="far fa-plus-square"></i>
 		</div>
 		<div class="MenuIcon" onclick="location.href='/follow';">
 			<i class="fas fa-heart"></i>
@@ -209,12 +221,6 @@
 			<i class="fas fa-user"></i>
 		</div>
 	</footer>
-
-	<!-- Scripts -->
-	<script src="/assets/js/browser.min.js"></script>
-	<script src="/assets/js/breakpoints.min.js"></script>
-	<script src="/assets/js/util.js"></script>
-	<script src="/assets/js/main.js"></script>
-	<script src="/assets/js/fontawesome.js" crossorigin="anonymous"></script>
+	<script src="assets/js/fontawesome.js" crossorigin="anonymous"></script>
 </body>
 </html>
