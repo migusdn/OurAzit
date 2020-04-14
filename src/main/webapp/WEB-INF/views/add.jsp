@@ -150,7 +150,10 @@
 		for(i=0;i<croppers.length; i++){
 
 
-			croppers[i].getCroppedCanvas().toBlob((blob) => {
+			croppers[i].getCroppedCanvas({
+				maxWidth: 1024,
+				maxHeight: 1024,
+			}).toBlob((blob) => {
 				const formData = new FormData();
 				formData.append('file', blob);
 				$.ajax({

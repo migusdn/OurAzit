@@ -122,8 +122,18 @@ public class AppController {
 		return "croptest";
 	}
 	@RequestMapping("/utest")
-	public String utest(Model model) {
-		logger.info("ctest");
-		return "uploadtest";
+	public String utest(Model model, HttpSession session) {
+		if(session.getAttribute("user_id") == null) {
+			logger.info("Login page");
+			return "login";
+		}
+		else {
+			PDao dao = sqlSession.getMapper(PDao.class);
+			ArrayList<PostDto> PostList = dao.postList((String)session.getAttribute("user_id"));
+			String json = new Gson().toJson(PostList);
+			model.addAttribute("PList", json);
+			logger.info("mypage");
+			return "uploadtest";
+		}
 	}
 }
