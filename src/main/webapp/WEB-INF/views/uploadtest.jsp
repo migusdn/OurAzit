@@ -72,9 +72,11 @@
 }
 .container.modal-open .modal {
   top: 50%;
-  z-index: 3;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+.wrapper{
+	z-index:0;
 }
 </style>
 </head>
@@ -99,7 +101,7 @@
 	<div class="modal">
     <div class="header">
     </div>
-    <div class="body"><p>And here is all its contents.</p>
+    <div class="body"><p style="color:white">And here is all its contents.</p>
       <a class="btn js-close-modal">Close</a>
     </div>
   </div>
@@ -134,12 +136,17 @@
 	});  
 	$('#modal').click(function(){
 		  $('.container').addClass('modal-open');
+		  $('.wrapper').css('z-index', -1);
 		});
 
 		$('.js-close-modal').click(function(){
 		  $('.container').removeClass('modal-open');
+		  setTimeout(function(){
+			  $('.wrapper').css('z-index', 0);  
+		  }, 600);
 		});
-	</script>
+		</script>
+	
 	</div>
 	<!-- Footer -->
 	<footer id="footer">

@@ -32,7 +32,6 @@
 <meta name="msapplication-TileImage" content="/assets/favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="assets/css/main.css" />
-<script src="assets/js/facebook.js"></script>
 <script src="assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -141,9 +140,7 @@ function onEnterLogin(){
   	var state = naver_id_login.getUniqState();
   	naver_id_login.setDomain("http://www.ourazit.com/");
   	naver_id_login.setState(state);
-  	naver_id_login.init_naver_id_login();
-    //<![CDATA[
-      // 사용할 앱의 JavaScript 키를 설정해 주세요.
+  	naver_id_login.init_naver_id_login();	
       Kakao.init('066353e715aea95dfd83321a40ebd926');
       function loginWithKakao() {
         // 로그인 창을 띄웁니다.
@@ -151,7 +148,7 @@ function onEnterLogin(){
           success: function(authObj) {
             //alert(JSON.stringify(authObj));
             Kakao.API.request({
-                url: '/v1/user/me',
+                url: '/v2/user/me',
                 success: function(res) {
                  console.log(res);
                  var userID = res.id;      //유저의 카카오톡 고유 id
