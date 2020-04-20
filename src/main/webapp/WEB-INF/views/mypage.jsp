@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML>
 <!--
 	Industrious by TEMPLATED
@@ -103,7 +104,15 @@ img{
 
 	<!-- Header -->
 	<header id="header">
-		<a class="userId" href="index.html">${sessionScope.user_id }</a><i id="logout" class="fas fa-sign-out-alt"></i>
+		<div class="userId">
+		${user_id}
+		
+		</div>
+		<c:if test="${sessionScope.user_id eq user_id}">
+		<c:out value='<div id="logout" style="position: absolute; right:0;">
+		<i class="fas fa-sign-out-alt"></i>
+		</div>' escapeXml="false"></c:out>
+		</c:if>
 	</header>
 	<div class="container">
 
@@ -115,7 +124,7 @@ img{
 				<div style="display: flex; margin: 0 auto;">
 					<div class="userInfo" style="color: white;">
 						<div class="num">
-							<b>0</b>
+							<b class="post_ctn">0</b>
 						</div>
 						게시물
 					</div>
@@ -169,9 +178,12 @@ img{
 		</section>
 		<script>
 	$(document).ready(function(){
+		var ctn=0;
 	$.each(${PList}, function(index, vo){
         renderList(false, vo);
+        ctn++;
     }) 	
+    $('.post_ctn').text(ctn);
 	});
 	let renderList = function(mode, vo){
         // 리스트 html을 정의

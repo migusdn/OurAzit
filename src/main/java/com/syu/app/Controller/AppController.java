@@ -74,6 +74,7 @@ public class AppController {
 		ArrayList<PostDto> PostList = dao.postList(user_id);
 		String json = new Gson().toJson(PostList);
 		model.addAttribute("PList", json);
+		model.addAttribute("userId", user_id);
 		logger.info("mypage");
 		return "mypage";
 		
@@ -132,6 +133,7 @@ public class AppController {
 			ArrayList<PostDto> PostList = dao.postList((String)session.getAttribute("user_id"));
 			String json = new Gson().toJson(PostList);
 			model.addAttribute("PList", json);
+			model.addAttribute("user_id", session.getAttribute("user_id"));
 			logger.info("mypage");
 			return "uploadtest";
 		}
