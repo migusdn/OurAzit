@@ -14,20 +14,44 @@
 <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 <style>
-.preview{
+.preview {
 	overflow: hidden;
-	width:33.3%;
+	width: 33.3%;
 	height: 216px;
 	display: inline-block;
 }
-.swiper-slide{
-	width:100%;
-}
-#image{
-	max-width:100%;
-	display:block;
+
+.swiper-slide {
+	width: 100%;
 }
 
+#image {
+	max-width: 100%;
+	display: block;
+}
+
+.wrap-loading { /*화면 전체를 어둡게 합니다.*/
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.2); /*not in ie */
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',
+		endColorstr='#20000000'); /* ie */
+}
+
+.wrap-loading div { /*로딩 이미지*/
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -21px;
+	margin-top: -21px;
+}
+
+.display-none { /*감추기*/
+	display: none;
+}
 </style>
 
 
@@ -36,12 +60,11 @@
 <body class="is-preload">
 	<!-- Header -->
 	<header id="header">
-		<i class="fas fa-camera" id="file"></i> <a class="logo" href="index.html">OurAzit</a> <i id="confirm" class="fas fa-paper-plane"></i>
-		<input multiple="multiple"type="file" accept="image/*;capture=camera" id="camera" style="display:none" accept="image/*">
+		<i class="fas fa-camera" id="file"></i> <a class="logo" href="index.html">OurAzit</a> <i id="confirm" class="fas fa-paper-plane"></i> <input multiple="multiple" type="file" accept="image/*;capture=camera" id="camera" style="display: none" accept="image/*">
 	</header>
 	<div class="wrapper">
 		<div class="preloadpoat">
-			<input type="text" id="comment" placeholder="문구 입력"style="width:100%; color:white;">
+			<input type="text" id="comment" placeholder="문구 입력" style="width: 100%; color: white;">
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
 					<!-- <div class="swiper-slide"style="width:100%;">
@@ -56,9 +79,9 @@
 					<img id="image" src="/images/test4.jpg" style="max-width: 100%; display: block;">
 					</div> -->
 				</div>
-				
+
 			</div>
-			<div class = "preview_wrapper"style="line-height: 0; display: block;">
+			<div class="preview_wrapper" style="line-height: 0; display: block;">
 				<!-- <img class="" style="margin: 0; padding: 0;" src="images/img01.JPG" width="33.3%" />
  -->
 			</div>
@@ -68,8 +91,10 @@
 
 		</div>
 	</div>
-	
-<script>
+	<div class="wrap-loading display-none">
+    	<div><img src="images/loading.gif" /></div>
+	</div>
+	<script>
 	var device_width = window.innerWidth;
 	document.getElementById("file").addEventListener("click", function(){
 		$('#camera').click();
@@ -146,6 +171,7 @@
 			alert('파일을 올리세요.');
 			return;
 		}
+        $('.wrap-loading').removeClass('display-none');
 		var i;
 		for(i=0;i<croppers.length; i++){
 
@@ -197,7 +223,9 @@
 				data : fdata,
 				type : 'POST',
 				success : function(result) {
+			        $('.wrap-loading').addClass('display-none');
 					location.href = "/";
+					
 				}
 			});
 		}

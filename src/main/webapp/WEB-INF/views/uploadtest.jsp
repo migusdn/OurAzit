@@ -18,6 +18,12 @@
 <script src="/assets/js/color.js"></script>
 
 <style>
+.preview {
+	overflow: hidden;
+	width: 33.3%;
+	display: inline-block;
+}
+
 .box {
 	position: relative;
 	width: 33.3%; /* 원하는 너비 */
@@ -46,72 +52,122 @@
 	padding: 0 1.25rem;
 	text-decoration: none;
 	margin: 0 auto;
-	
 }
+
 .modal {
-  background: #262626;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
-  top: 100%;
-  position: fixed;
-  left: 0;
-  text-align: left;
-  .header {
-    padding:20px;
-    border-bottom: 1px solid #ddd;
-    font: 300 24px Lato;
-    position: relative;
-    }
-  .body {
-    padding: 20px;
-    font: 300 16px Lato;
-  }
+	background: black;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
+	top: 100%;
+	position: fixed;
+	left: 0;
+	text-align: left; . header { padding : 20px;
+	border-bottom: 1px solid #ddd;
+	font: 300 24px Lato;
+	position: relative;
+}
+
+.body {
+	padding: 20px;
+	font: 300 16px Lato;
+}
+
 }
 .container.modal-open .modal {
-  top: 50%;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+	top: 0%;
+	border-top-left-radius: 1rem;
+	border-top-right-radius: 1rem;
 }
-.wrapper{
-	z-index:0;
+
+.wrapper {
+	z-index: 0;
+}
+
+.userInfo {
+	margin: auto 1rem;
+	color: white;
+}
+
+.userInfo>.num {
+	text-align: center;
+}
+img{
+	max-width: 100%;
 }
 </style>
 </head>
 <body class="is-preload">
-	
+
 	<!-- Header -->
 	<header id="header">
-		<a class="userId" href="index.html">${sessionScope.user_id }</a> 
-		<i class="fas fa-bars" id="modal" style="position: absolute;"></i>
+		<a class="userId" href="index.html">${sessionScope.user_id }</a><i id="logout" class="fas fa-sign-out-alt"></i>
 	</header>
 	<div class="container">
 
-	<section>
-		<div class="data" style="padding: 20px 15px 0;">
-			<div>
+		<div class="data">
+			<div style="display: flex; margin: 1rem;">
 				<div class="image">
-					<img src="/images/pic01.jpg" width="50" alt="" />
+					<img src="/images/pic01.jpg" style="width: 5rem;" alt="" />
+				</div>
+				<div style="display: flex; margin: 0 auto;">
+					<div class="userInfo" style="color: white;">
+						<div class="num">
+							<b>0</b>
+						</div>
+						게시물
+					</div>
+					<div class="userInfo">
+						<div class="num">
+							<b>0</b>
+						</div>
+						팔로워
+					</div>
+					<div class="userInfo">
+						<div class="num">
+							<b>0</b>
+						</div>
+						팔로잉
+					</div>
 				</div>
 			</div>
+			<div style="margin: 1rem 1rem 0.5rem 1rem">이름</div>
+			<div id="modal" style="color: white; text-align: center; margin: 0 1rem; border: 1px solid gray; border-radius: 5px; padding: 0.2rem 0;">프로필수정</div>
 		</div>
-	</section>
-	<div class="modal">
-    <div class="header">
-    </div>
-    <div class="body"><p style="color:white">And here is all its contents.</p>
-      <a class="btn js-close-modal">Close</a>
-    </div>
-  </div>
+		<div class="modal">
+			<div class="header" style="background: #262626; height: 60px; display: flex;">
+				<div class="close-modal" style="margin: auto;">
+					<b>취소</b>
+				</div>
+				<div style="margin: auto;">
+					<b>프로필 편집</b>
+				</div>
+				<div style="margin: auto;">
+					<b>완료</b>
+				</div>
+			</div>
+			<div class="body">
+				<div class="close-modal">Close</div>
+				<div class="">test</div>
 
+			</div>
+		</div>
 
-	<!-- Testimonials -->
-	<section class="wrapper" id="main" style="padding: 2rem 0 70px 0;">
-		<div style="display: block;" id="load"></div>
-	</section>
-	<script>
+		<!-- Testimonials -->
+		<section class="wrapper" id="main" style="padding: 2rem 0 70px 0;">
+			<div class="preview_wrapper" style="line-height:0; display:block;">
+<!-- 				<div class="preview"><img src="https://i.picsum.photos/id/239/700/700.jpg"></div
+				><div class="preview"><img src="https://i.picsum.photos/id/239/700/700.jpg"></div
+				><div class="preview"><img src="https://i.picsum.photos/id/239/700/700.jpg"></div>
+			 -->
+			</div>
+
+			<div style="display: block;" id="load"></div>
+
+		</section>
+		<script>
 	$(document).ready(function(){
 	$.each(${PList}, function(index, vo){
         renderList(false, vo);
@@ -119,34 +175,43 @@
 	});
 	let renderList = function(mode, vo){
         // 리스트 html을 정의
+        var post_content = JSON.parse(vo.post_content);
+        console.log(post_content);
+        console.log(post_content.contents[0][0].savedPath);
         let html = ""
-        	html +='<div class="box" style="background-color:'+vo.post_background+';margin:0; display:inline-block;">';
-        	html +='<div class="post" id="post" postid="'+vo.post_id+'"';
-        	html +='style="margin:0;padding:10px;">';
-        	html +='<span style="background-color:white; border-radius:13px; padding-left:5px; padding-right:5px">';
-        	html +=vo.post_title +'</span></div>';
-
-            $("#load").append(html);
+        	html +='<div class="preview" postid="'+vo.post_id+'">';
+        	html +='<img src="http://api.ourazit.com/img'
+        			+ post_content.contents[0][0].savedPath
+        			+ '/'
+        			+ post_content.contents[0][0].savedName
+        			+'"></div>';
+            $(".preview_wrapper").append(html);
         
     }
-	$(document).on('click', '.post', function () {
+	$(document).on('click', '.preview', function () {
 	    var post_id = $(this).attr('postid');
 		location.href='/post/'+post_id;
 	    // your function here
 	});  
 	$('#modal').click(function(){
 		  $('.container').addClass('modal-open');
+		  $('body').addClass('')
 		  $('.wrapper').css('z-index', -1);
+		  $('#header').css('z-index', -1);
 		});
 
-		$('.js-close-modal').click(function(){
+		$('.close-modal').click(function(){
 		  $('.container').removeClass('modal-open');
 		  setTimeout(function(){
 			  $('.wrapper').css('z-index', 0);  
+			  $('#header').css('z-index', 0);
 		  }, 600);
 		});
+	$('#logout').click(function(){
+		location.href='/Logout';
+	})
 		</script>
-	
+
 	</div>
 	<!-- Footer -->
 	<footer id="footer">
@@ -174,7 +239,6 @@
 	<script src="/assets/js/breakpoints.min.js"></script>
 	<script src="/assets/js/util.js"></script>
 	<script src="/assets/js/main.js"></script>
-	<script src="/assets/js/fontawesome.js" crossorigin="anonymous"></script>
-
+	<script src="https://kit.fontawesome.com/0b2e511928.js" crossorigin="anonymous"></script>
 </body>
 </html>

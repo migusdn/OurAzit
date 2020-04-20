@@ -24,9 +24,9 @@ $(function login(){
             data: JSON.stringify(data),
             contentType: 'text/plain; charset=utf-8',
             success: function (response) {
-            	alert(response);
+            	//alert(response);
                 if(response == 1){
-                    alert('로그인 성공');
+                    //alert('로그인 성공');
                     location.replace('/'); // 화면 갱신
                 } else {
                     alert('아이디와 비밀번호를 확인해주세요');
