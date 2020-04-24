@@ -23,7 +23,9 @@
 		parameterType="int">
 		SELECT p.*,
 		(select count(*) from post_like where post_id
-		= p.post_id) as post_like
+		= p.post_id) as post_like,
+		(select count(*) from reply where post_id
+		= p.post_id) as post_reply_ctn
 		FROM post p
 		order by p.post_date DESC
 		LIMIT 5

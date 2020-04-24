@@ -62,72 +62,6 @@
 	background-color: lightgray;
 	box-sizing: border-box;
 }
-
-#reply_area {
-	margin-left: 1rem;
-	color: gray;
-}
-
-html.open {
-	overflow: hidden;
-}
-
-#reply {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0px;
-	right: -100%;
-	z-index: 10;
-	background-color: #000000;
-	text-align: center;
-	transition: All 0.2s ease;
-	-webkit-transition: All 0.2s ease;
-	-moz-transition: All 0.2s ease;
-	-o-transition: All 0.2s ease;
-}
-
-.reply_header>.close {
-	font-size: 1.5rem;
-	padding: 0 1.25rem;
-}
-
-#reply.open {
-	right: 0px;
-	overflow: scroll;
-}
-
-.page_cover.open {
-	display: block;
-}
-
-.page_cover {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	background-color: rgba(0, 0, 0, 0.4);
-	z-index: 4;
-	display: none;
-}
-
-.reply_wrapper {
-	display: flex;
-}
-
-.reply_wrapper>.comment {
-	display: flex;
-	margin: 1rem 0;
-}
-
-.reply_wrapper>.comment>.user_name {
-	margin-right: 0.5rem;
-}
-
-.reply_wrapper>.comment>.user_comment {
-	color: white;
-}
 </style>
 </head>
 <body class="is-preload">
@@ -285,36 +219,18 @@ html.open {
 								</div>
 							</div>
 							<div id="post_comment" style="padding-left: 1rem; color: white;">
-								<strong>userID</strong> TestMsg
+								<strong>userID</strong> 기모링
 							</div>
-							<!-- <div id="reply_area">
+							<div id="reply_area">
 								<input type="text" id="reply_content" placeholder="댓글 달기..." style="width: 70%; display: inline-block;">
 								<button id="reply" class="reply" postid="48">확인</button>
-							</div> -->
-							<div id="reply_area" postid="81">
-								댓글 n개 모두 보기
-							</div>`
-							
+							</div>
+
 						</div>
 					</section>
 				</div>
 			</div>
 		</section>
-	</div>
-	<div id="reply">
-		<div class="reply_header" style="color: rgba(255, 255, 255, 0.5); background: #181818; height: 60px; display: flex; align-items: center; border-bottom: 1px solid #80808045; position: fixed; top: 0; left: 0; right: 0;">
-			<div onclick="history.back();" class="close" style="position: absolute;">
-				<i class="fas fa-chevron-left"></i>
-			</div>
-			<div style="margin: auto;">
-				<b>댓글</b>
-			</div>
-		</div>
-		<div class="reply_fetch" style="margin-top: 60px; margin-bottom: 50px;"></div>
-		<div>
-		<input type="text" id="reply_content" placeholder="댓글 달기..." style="width: 70%; display: inline-block;">
-		<button  class="reply" postid="81">확인</button>
-		</div>
 	</div>
 	<input type="hidden" id="startNo" value="0">
 	<!-- Footer -->
@@ -538,17 +454,12 @@ html.open {
 			html += '<strong>'+vo.user_id+'&nbsp</strong>';
 			html += post_content.comment;
 			html += '</div>';
-			html += '<div id="reply_area" postid="';
-			html += vo.post_id;
-			html += '">';
-			html += '댓글&nbsp';
-			html += vo.post_reply_ctn;
-			html += '개 모두 보기';/* 
+			html += '<div id="reply_area">';
 			html += '<input type="text" id="reply_content" placeholder="댓글 달기..."';
 			html += 'style="width:70%; display: inline-block;">';
 			html += '<button id="reply" class="reply"';
 			html += 'postid='+vo.post_id+'>';
-			html += '확인</button>'; */
+			html += '확인</button>';
 			html += '</div>';
 			html += '</div>';
 			html += '</section>';
@@ -567,54 +478,6 @@ html.open {
 				}
 			}
 			return false;
-		}
-		$(document).on('click', '#reply_area', function(){
-			var post_id = $(this).attr('postid');
-			$('.reply').attr('postid',post_id);
-			$("#reply,.page_cover,html").addClass("open");
-			window.location.hash = "#open";
-			$("#header").css("z-index", -1);
-			var paramData = new Object();
-			paramData.post_id= $(this).attr('postId');
-			
-			$.ajax({
-				url : "/replyfetch",
-				type : "POST",
-				data : JSON.stringify(paramData),
-				contentType : 'application/json; charset=utf-8;',
-				dataType : "json",
-				success : function(result) {
-					console.log(JSON.stringify(result));
-					$.each(result, function(index, vo) {
-						replyList(false, vo);
-					})
-				}
-			});
-		});
-
-		window.onhashchange = function() {
-			if (location.hash != "#open") {
-				$("#reply,.page_cover,html").removeClass("open");
-				$("#header").css("z-index", 1000);
-				$('.reply_fetch').empty();
-			}
-		};
-		let replyList = function(mode, vo) {
-			var html = "";
-			html +='<div class="reply_wrapper">';
-			html +='<div class="profile" style="margin: 1rem 0.8rem">';
-			html +='<img style="border-radius: 100%; width: 2.5rem; display: block;" src="images/pic01.jpg" alt="">';
-			html += '</div>';
-			html += '<div class="comment">';
-			html += '<div class="user_name">';
-			html += '<strong>';
-			html += vo.user_id;
-			html += '</strong>';
-			html += '</div>'
-			html += '<div class="user_comment">';
-			html += vo.reply_content;
-			html += '</div></div></div>';
-			$('.reply_fetch').append(html);
 		}
 	</script>
 	<!-- Scripts -->

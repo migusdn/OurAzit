@@ -194,7 +194,7 @@ img{
         	html +='<div class="preview" postid="'+vo.post_id+'">';
         	html +='<img src="http://api.ourazit.com/img'
         			+ post_content.contents[0][0].savedPath
-        			+ '/'
+        			+ '/s_'
         			+ post_content.contents[0][0].savedName
         			+'"></div>';
             $(".preview_wrapper").append(html);

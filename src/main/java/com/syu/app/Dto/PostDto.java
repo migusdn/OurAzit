@@ -9,6 +9,7 @@ public class PostDto {
 	private String post_edit_date;
 	private String post_background;
 	private String post_like;
+	private String post_reply_ctn;
 	
 	public String getPost_id() {
 		return post_id;
@@ -57,5 +58,11 @@ public class PostDto {
 	}
 	public void setPost_like(String post_like) {
 		this.post_like = post_like;
+	}
+	public String getPost_reply_ctn() {
+		return post_reply_ctn;
+	}
+	public void setPost_reply_ctn(String post_reply_ctn) {
+		this.post_reply_ctn = post_reply_ctn;
 	}
 }

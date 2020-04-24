@@ -120,6 +120,19 @@ public class PostController {
 		return "post_detail";
 	}
 	@ResponseBody
+	@RequestMapping(value = "/replyfetch", produces = "application/json; charset=utf8")
+	public String replyfetch(@RequestBody String paramData) throws ParseException {
+		PDao dao = sqlSession.getMapper(PDao.class);
+		System.out.println(paramData);
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObj = (JSONObject) parser.parse(paramData);
+		ArrayList<ReplyDto> RList = dao.reply_view(jsonObj.get("post_id").toString().trim());
+
+		String json = new Gson().toJson(RList);
+		System.out.println(json);
+		return json.toString();
+	}
+	@ResponseBody
 	@RequestMapping(value = "/postfetch", produces = "application/json; charset=utf8")
 	public String mainfetch(@RequestBody String paramData) {
 		logger.info("postfetch");
@@ -139,6 +152,7 @@ public class PostController {
 				sObject.put("post_date", dto.get(i).getPost_date());
 				sObject.put("post_background", dto.get(i).getPost_background());
 				sObject.put("post_like", dto.get(i).getPost_like());
+				sObject.put("post_reply_ctn", dto.get(i).getPost_reply_ctn());
 				jArray.add(sObject);
 			}
 			obj.put("post", jArray);
