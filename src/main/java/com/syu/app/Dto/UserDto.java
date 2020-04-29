@@ -10,6 +10,7 @@ public class UserDto {
 	private String user_type;
 	private String user_birth;
 	private String regis_date;
+	private String salt;
 	public String getUser_id() {
 		return user_id;
 	}
@@ -63,5 +64,11 @@ public class UserDto {
 	}
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
+	}
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 }

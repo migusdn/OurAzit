@@ -245,7 +245,7 @@ html.open {
 						</div>
 					</section>
 					 -->
-					<section style="padding-bottom: 0" postid="48" class="post">
+					<!-- <section style="padding-bottom: 0" postid="48" class="post">
 						<div class="content">
 							<div class="author" userid="migusdn">
 								<div class="image">
@@ -287,16 +287,16 @@ html.open {
 							<div id="post_comment" style="padding-left: 1rem; color: white;">
 								<strong>userID</strong> TestMsg
 							</div>
-							<!-- <div id="reply_area">
+							<div id="reply_area">
 								<input type="text" id="reply_content" placeholder="댓글 달기..." style="width: 70%; display: inline-block;">
 								<button id="reply" class="reply" postid="48">확인</button>
-							</div> -->
+							</div>
 							<div id="reply_area" postid="81">
 								댓글 n개 모두 보기
 							</div>`
 							
 						</div>
-					</section>
+					</section> -->
 				</div>
 			</div>
 		</section>

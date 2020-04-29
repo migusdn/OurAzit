@@ -97,6 +97,9 @@
 								<div>
 									<strong><c:out value="${post.user_id }" /></strong>
 								</div>
+								<div style="font-size: 1.5rem; right: 0; position:absolute; margin-right:1rem;">
+									<i class="fas fa-ellipsis-h"></i>
+								</div>
 							</div>
 							<div class="swiper-container">
 								<div class="swiper-wrapper">
