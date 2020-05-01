@@ -81,18 +81,18 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "Login_Act", produces = "application/json; charset=utf8")
 	public String LoginAct(HttpServletRequest request, @RequestBody String paramData, HttpSession session)
-			throws ParseException {
+			throws ParseException, NoSuchAlgorithmException, UnsupportedEncodingException {
 		logger.info("로그인 컨트롤러 접속");
 		JSONObject Login_Data = (JSONObject) parser.parse(paramData.toString());
-		Map map = new HashMap();
-		map.put("user_id", Login_Data.get("user_id").toString().trim());
-		map.put("user_password", Login_Data.get("user_password").toString().trim());
-		logger.info("Login info");
-		logger.info("User_id: " + map.get("user_id"));
-		logger.info("User_password: " + map.get("user_password"));
 		UDao dao = sqlSession.getMapper(UDao.class);
-		UserDto dto = dao.Login(map);
-		if (dto != null) {
+		UserDto dto = dao.Login(Login_Data.get("user_id").toString().trim());
+		String pwd = EncryptUtil.getEncrypt(Login_Data.get("user_password").toString().trim(), dto.getSalt());
+		logger.info("user_pwd:"+Login_Data.get("user_password").toString());
+		logger.info("encrypt pwd:"+pwd);
+		logger.info("salt:"+dto.getSalt());
+		logger.info("user_real_pwd:"+dto.getUser_password());
+		
+		if (pwd.equals(dto.getUser_password())) {
 			session.setAttribute("user_id", dto.getUser_id());
 			return "1";
 		} else

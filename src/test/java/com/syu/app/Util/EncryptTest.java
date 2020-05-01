@@ -10,6 +10,7 @@ import org.junit.Test;
 public class EncryptTest {
 	@Test
 	public void encryptTest() throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		assertEquals(0,EncryptUtil.getEncrypt("test","1111"));
+		assertEquals("ff966b1eff052fd37622d1442e6612c02c06621268c19c3d55af000128465866",EncryptUtil.getEncrypt("test","1111"));
+		assertEquals("test", EncryptUtil.genSalt(),0);
 	}
 }

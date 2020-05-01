@@ -21,7 +21,7 @@ public class UserDao implements UDao{
 	}
 
 	@Override
-	public UserDto Login(Map map) {
+	public UserDto Login(String user_id) {
 		return null;
 	}
 
