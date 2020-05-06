@@ -33,9 +33,6 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 <link rel="stylesheet" href="/assets/css/main.css" />
 <script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/color.js"></script>
-
-
 <meta charset="utf-8" />
 <style>
 #productBeforeList {
@@ -310,8 +307,8 @@ html.open {
 				<b>댓글</b>
 			</div>
 		</div>
-		<div class="reply_fetch" style="margin-top: 60px; margin-bottom: 50px;"></div>
-		<div>
+		<div class="reply_fetch" style="margin-top: 60px; margin-bottom: 6rem;"></div>
+		<div style="display: flex; position: fixed; bottom: 0; padding-left: 1.5rem; background: black; width: 100%; padding-bottom: 3rem;">
 		<input type="text" id="reply_content" placeholder="댓글 달기..." style="width: 70%; display: inline-block;">
 		<button  class="reply" postid="81">확인</button>
 		</div>
@@ -364,6 +361,23 @@ html.open {
 					success : function(result) {
 						if (result == '-1')
 							alert('잘못된 접근');
+						else{
+							var html = "";
+							html +='<div class="reply_wrapper">';
+							html +='<div class="profile" style="margin: 1rem 0.8rem">';
+							html +='<img style="border-radius: 100%; width: 2.5rem; display: block;" src="images/pic01.jpg" alt="">';
+							html += '</div>';
+							html += '<div class="comment">';
+							html += '<div class="user_name">';
+							html += '<strong>';
+							html += user_id;
+							html += '</strong>';
+							html += '</div>'
+							html += '<div class="user_comment">';
+							html += reply_content.val();
+							html += '</div></div></div>';
+							$('.reply_fetch').append(html);
+						}
 						reply_content.val("");
 
 					}
@@ -506,7 +520,7 @@ html.open {
 			for (var j = 0; j < contents.length; j++) {
 				console.log(contents[j]);
 				console.log(contents[j][0].savedPath);
-				html += '<div class="swiper-slide"><img src="http://api.ourazit.com/img'
+				html += '<div class="swiper-slide"><img src="https://api.ourazit.com/img'
 						+ contents[j][0].savedPath
 						+ '/'
 						+ contents[j][0].savedName

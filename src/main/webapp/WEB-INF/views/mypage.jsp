@@ -16,7 +16,6 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="/assets/css/main.css" />
 <script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/color.js"></script>
 
 <style>
 .preview {
