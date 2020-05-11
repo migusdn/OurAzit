@@ -1,4 +1,5 @@
 package com.syu.app.Dao;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -9,10 +10,11 @@ import com.syu.app.Dto.LikeDto;
 import com.syu.app.Dto.PostDto;
 import com.syu.app.Dto.ReplyDto;
 import com.syu.app.Dto.UserDto;
-public class PostDao implements PDao{
+
+public class PostDao implements PDao {
 
 	JdbcTemplate template;
-	
+
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
 		this.template = template;
@@ -33,7 +35,8 @@ public class PostDao implements PDao{
 	}
 
 	@Override
-	public void reply(Map map) { }
+	public void reply(Map map) {
+	}
 
 	@Override
 	public PostDto post_detail(String post_id) {
@@ -46,10 +49,12 @@ public class PostDao implements PDao{
 	}
 
 	@Override
-	public void like(Map map) {	}
+	public void like(Map map) {
+	}
 
 	@Override
-	public void unlike(Map map) { }
+	public void unlike(Map map) {
+	}
 
 	@Override
 	public ArrayList<LikeDto> likepost(String user_id) {
@@ -59,6 +64,12 @@ public class PostDao implements PDao{
 
 	@Override
 	public LikeDto like_detail(Map map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<LikeDto> like_view(int post_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

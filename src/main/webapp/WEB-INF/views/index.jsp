@@ -60,13 +60,14 @@
 	box-sizing: border-box;
 }
 
-#reply_area {
-	margin-left: 1rem;
-	color: gray;
-}
+
 
 html.open {
 	overflow: hidden;
+}
+#reply_area {
+	margin-left: 1rem;
+	color: gray;
 }
 
 #reply {
@@ -94,21 +95,6 @@ html.open {
 	overflow: scroll;
 }
 
-.page_cover.open {
-	display: block;
-}
-
-.page_cover {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	background-color: rgba(0, 0, 0, 0.4);
-	z-index: 4;
-	display: none;
-}
-
 .reply_wrapper {
 	display: flex;
 }
@@ -125,6 +111,69 @@ html.open {
 .reply_wrapper>.comment>.user_comment {
 	color: white;
 }
+
+.page_cover.open {
+	display: block;
+}
+
+.page_cover {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 4;
+	display: none;
+}
+
+#like_modal_area {
+	margin-left: 1rem;
+	color: gray;
+}
+
+#like_modal {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	right: -100%;
+	z-index: 10;
+	background-color: #000000;
+	text-align: center;
+	transition: All 0.2s ease;
+	-webkit-transition: All 0.2s ease;
+	-moz-transition: All 0.2s ease;
+	-o-transition: All 0.2s ease;
+}
+
+.like_modal_header>.close {
+	font-size: 1.5rem;
+	padding: 0 1.25rem;
+}
+
+#like_modal.open {
+	right: 0px;
+	overflow: scroll;
+}
+
+.like_modal_wrapper {
+	display: flex;
+}
+
+.like_modal_wrapper>.comment {
+	display: flex;
+	margin: 1rem 0;
+}
+
+.like_modal_wrapper>.comment>.user_name {
+	margin-right: 0.5rem;
+}
+
+.like_modal_wrapper>.comment>.user_comment {
+	color: white;
+}
+
 </style>
 </head>
 <body class="is-preload">
@@ -242,6 +291,7 @@ html.open {
 						</div>
 					</section>
 					 -->
+					 
 					<!-- <section style="padding-bottom: 0" postid="48" class="post">
 						<div class="content">
 							<div class="author" userid="migusdn">
@@ -313,6 +363,21 @@ html.open {
 		<button  class="reply" postid="81">확인</button>
 		</div>
 	</div>
+	<div id="like_modal">
+		<div class="like_modal_header" style="color: rgba(255, 255, 255, 0.5); background: #181818; height: 60px; display: flex; align-items: center; border-bottom: 1px solid #80808045; position: fixed; top: 0; left: 0; right: 0;">
+			<div onclick="history.back();" class="close" style="position: absolute;">
+				<i class="fas fa-chevron-left"></i>
+			</div>
+			<div style="margin: auto;">
+				<b>좋아요</b>
+			</div>
+		</div>
+		<div class="like_modal_fetch" style="margin-top: 60px; margin-bottom: 6rem;"></div>
+		
+	</div>
+	
+	
+	
 	<input type="hidden" id="startNo" value="0">
 	<!-- Footer -->
 	<footer id="footer">
@@ -544,7 +609,7 @@ html.open {
 				html += 'like="0" ';
 			}
 			html += '></i>';
-			html += '<div class="count" style="padding: 0 1rem"><strong style="color:white; display: inline-block">좋아요</strong>';
+			html += '<div class="count" style="padding: 0 1rem" post_id="'+vo.post_id+'"><strong style="color:white; display: inline-block">좋아요</strong>';
 			html += '<strong class="like_ctn" style="color: white; display:inline-block; padding-left:0.5rem;">' + vo.post_like + '</strong>';
 			html += '<strong style="display: inline-block; color:white;"> 개</strong>';
 			html += '</div></div>';
@@ -582,6 +647,7 @@ html.open {
 			}
 			return false;
 		}
+		//댓글 모달 호출
 		$(document).on('click', '#reply_area', function(){
 			var post_id = $(this).attr('postid');
 			$('.reply').attr('postid',post_id);
@@ -605,14 +671,17 @@ html.open {
 				}
 			});
 		});
-
+		//댓글 모달 제거
 		window.onhashchange = function() {
 			if (location.hash != "#open") {
 				$("#reply,.page_cover,html").removeClass("open");
+				$("#like_modal,.page_cover,html").removeClass("open");
 				$("#header").css("z-index", 1000);
 				$('.reply_fetch').empty();
+				$('.like_modal_fetch').empty();
 			}
 		};
+		//댓글 List 갱신
 		let replyList = function(mode, vo) {
 			var html = "";
 			html +='<div class="reply_wrapper">';
@@ -630,6 +699,62 @@ html.open {
 			html += '</div></div></div>';
 			$('.reply_fetch').append(html);
 		}
+		
+		
+		//좋아요 모달 호출
+		$(document).on('click', '.count', function(){
+			var post_id = $(this).attr('post_id');
+			console.log(post_id);
+			$('.like_modal').attr('postid',post_id);
+			$("#like_modal,.page_cover,html").addClass("open");
+			window.location.hash = "#open";
+			$("#header").css("z-index", -1);
+			var paramData = post_id;/* new Object();
+			paramData.post_id= $(this).attr('postId');
+			 */
+			$.ajax({
+				url : "/likefetch",
+				type : "POST",
+				data : paramData,
+				contentType : 'text/plane; charset=utf-8;',
+				dataType : "json",
+				success : function(result) {
+					console.log(JSON.stringify(result));
+					$.each(result, function(index, vo) {
+						likeList(false, vo);
+					})
+				}
+			});
+		});
+		//댓글 모달
+		/* window.onhashchange = function() {
+			if (location.hash != "#open") {
+				$("#like_modal,.page_cover,html").removeClass("open");
+				$("#header").css("z-index", 1000);
+				$('.reply_fetch').empty();
+			}
+		}; */
+		//좋아요 List 갱신
+		let likeList = function(mode, vo) {
+			var html = "";
+			html +='<div class="reply_wrapper">';
+			html +='<div class="profile" style="margin: 1rem 0.8rem">';
+			html +='<img style="border-radius: 100%; width: 2.5rem; display: block;" src="images/pic01.jpg" alt="">';
+			html += '</div>';
+			html += '<div class="comment">';
+			html += '<div class="user_name">';
+			html += '<strong>';
+			html += vo.user_id;
+			html += '</strong>';
+			html += '</div>'
+			html += '<div class="user_comment">';
+			//html += vo.reply_content;
+			html += '</div></div></div>';
+			console.log(html);
+			$('.like_modal_fetch').append(html);
+		}
+		
+		
 	</script>
 	<!-- Scripts -->
 	<script src="assets/js/browser.min.js"></script>

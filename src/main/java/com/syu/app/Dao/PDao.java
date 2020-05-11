@@ -18,4 +18,5 @@ public interface PDao {
 	public void unlike(Map map);
 	public ArrayList<LikeDto> likepost(String user_id);
 	public LikeDto like_detail(Map map);
+	public ArrayList<LikeDto> like_view(int post_id);
 }

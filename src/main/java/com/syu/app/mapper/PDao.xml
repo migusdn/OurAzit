@@ -69,11 +69,17 @@
 		(#{user_id},#{post_id}, #{author_id})
 	</insert>
 	<delete id="unlike" parameterType="map">
-		DELETE FROM post_like where
-		user_id=#{user_id} AND post_id=#{post_id}
+		DELETE FROM post_like 
+		WHERE
+			user_id=#{user_id} 
+		AND 
+			post_id=#{post_id}
 	</delete>
 	<select id="likepost" parameterType="String"
 		resultType="com.syu.app.Dto.LikeDto">
 		SELECT * FROM post_like WHERE user_id = #{user_id}
+	</select>
+	<select id="like_view" parameterType="int" resultType="com.syu.app.Dto.LikeDto">
+		SELECT * FROM post_like WHERE post_id = #{post_id}
 	</select>
 </mapper>

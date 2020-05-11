@@ -64,7 +64,7 @@
 	top: 100%;
 	position: fixed;
 	left: 0;
-	text-align: left; . header { padding : 20px;
+	text-align: left; .header { padding : 20px;
 	border-bottom: 1px solid #ddd;
 	font: 300 24px Lato;
 	position: relative;
@@ -96,6 +96,33 @@
 }
 img{
 	max-width: 100%;
+}
+.profile{
+	text-align:center;
+	margin-top:1.5rem
+}
+.profile > .profile_upload {
+	color: skyblue;
+	font-size: 0.9rem;
+}
+.profile > .profile_img > img{
+	border-radius: 50%;
+	width:6.5rem;
+}
+.user_info{
+	color: white;
+	font-weight: 500;
+	margin-top: 1rem;
+}
+.user_name{
+	display: flex;
+}
+.user_nick{
+	display: flex;
+}
+.modify{
+	margin-left: 1rem;
+	
 }
 </style>
 </head>
@@ -157,15 +184,33 @@ img{
 				</div>
 			</div>
 			<div class="body">
-				<div class="close-modal">Close</div>
-				<div class="">test</div>
+				<div class="profile">
+					<div class="profile_img">
+					<img src="/images/pic01.jpg" style="width: 5rem;" alt="" />
+					</div>
+					<div class="profile_upload">
+						프로필 사진 바꾸기
+					</div>
+				</div>
+				<div class="user_info">
+					<div class="user_name">
+						<div class="modify">이름</div>
+						<div>asdf</div>
+					</div>
+					<div class="user_nick">
+						<div class="modify">닉네임</div>
+						<div>ㅁㄴㅇㄹ</div>
+					</div>
+					<div class="edit_pwd"></div>
+				</div>
+				
 
 			</div>
+			<input type="file" accept="image/*;capture=camera" id="camera" style="display: none" accept="image/*">
 		</div>
 
-		<!-- Testimonials -->
 		<section class="wrapper" id="main" style="padding: 2rem 0 70px 0;">
-			<div class="preview_wrapper" style="line-height:0; display:block;">
+			<div class="preview_wrapper" style="line-height: 0; display:block;">
 <!-- 				<div class="preview"><img src="https://i.picsum.photos/id/239/700/700.jpg"></div
 				><div class="preview"><img src="https://i.picsum.photos/id/239/700/700.jpg"></div
 				><div class="preview"><img src="https://i.picsum.photos/id/239/700/700.jpg"></div>

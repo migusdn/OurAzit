@@ -133,6 +133,17 @@ public class PostController {
 		return json.toString();
 	}
 	@ResponseBody
+	@RequestMapping(value = "/likefetch", produces = "application/json; charset=utf8")
+	public String likefetch(@RequestBody String paramData) throws ParseException {
+		System.out.println(paramData);
+		PDao dao = sqlSession.getMapper(PDao.class);
+		int post_id = Integer.parseInt(paramData.trim());
+		ArrayList<LikeDto> dto = dao.like_view(post_id);
+		String json = new Gson().toJson(dto);
+		System.out.println(json);
+		return json.toString();
+	}
+	@ResponseBody
 	@RequestMapping(value = "/postfetch", produces = "application/json; charset=utf8")
 	public String mainfetch(@RequestBody String paramData) {
 		logger.info("postfetch");
@@ -162,6 +173,7 @@ public class PostController {
 		System.out.println(obj.toString());
 		return obj.toString();
 	}
+	
 	@ResponseBody
 	@RequestMapping("/reply")
 	public String reply(HttpSession session, @RequestBody String paramData) throws ParseException {
