@@ -122,6 +122,7 @@ img{
 }
 .modify{
 	margin-left: 1rem;
+	width: 25%;
 	
 }
 </style>
@@ -145,7 +146,7 @@ img{
 		<div class="data">
 			<div style="display: flex; margin: 1rem;">
 				<div class="image">
-					<img src="/images/pic01.jpg" style="width: 5rem;" alt="" />
+					<img class="profileImg"src="/images/pic01.jpg" style="width: 5rem;" alt="" />
 				</div>
 				<div style="display: flex; margin: 0 auto;">
 					<div class="userInfo" style="color: white;">
@@ -179,14 +180,14 @@ img{
 				<div style="margin: auto;">
 					<b>프로필 편집</b>
 				</div>
-				<div style="margin: auto;">
+				<div class="submit"style="margin: auto;">
 					<b>완료</b>
 				</div>
 			</div>
 			<div class="body">
 				<div class="profile">
 					<div class="profile_img">
-					<img src="/images/pic01.jpg" style="width: 5rem;" alt="" />
+					<img class="profileImg"src="/images/pic01.jpg" style="width: 5rem;" alt="" />
 					</div>
 					<div class="profile_upload">
 						프로필 사진 바꾸기
@@ -206,7 +207,7 @@ img{
 				
 
 			</div>
-			<input type="file" accept="image/*;capture=camera" id="camera" style="display: none" accept="image/*">
+			<input type="file" accept="image/*;capture=camera" id="profile" style="display: none" accept="image/*">
 		</div>
 
 		<section class="wrapper" id="main" style="padding: 2rem 0 70px 0;">
@@ -221,6 +222,21 @@ img{
 
 		</section>
 		<script>
+		
+		
+		
+	$(document).on('click', '.profile_upload', function (){
+		alert('is working');
+		$('#profile').click();
+		
+	});	
+	var file = document.getElementById("profile");
+	$(document).on('change', '#profile',function (e){
+		var file=e.target.files[0];
+		console.log(file);
+		$('.profileImg').attr('src', URL.createObjectURL(e.target.files[0]));
+		console.log(URL.createObjectURL(e.target.files[0]));
+	});
 	$(document).ready(function(){
 		var ctn=0;
 	$.each(${PList}, function(index, vo){
@@ -266,6 +282,19 @@ img{
 	$('#logout').click(function(){
 		location.href='/Logout';
 	})
+	$('.submit').click(function(){
+		alert('is working');
+		const formData = new FormData();
+		file = $('#profile')[0];
+		console.log(file.files[0]);
+		if(file.files.length!=0){
+			alert('is not empty');
+		} else{
+			alert('is empty');
+		}
+	});
+	
+	
 		</script>
 
 	</div>

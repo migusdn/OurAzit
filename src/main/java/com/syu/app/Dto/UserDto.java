@@ -11,6 +11,14 @@ public class UserDto {
 	private String user_birth;
 	private String regis_date;
 	private String salt;
+	private String user_profile;
+	
+	public String getUser_profile() {
+		return user_profile;
+	}
+	public void setUser_profile(String user_profile) {
+		this.user_profile = user_profile;
+	}
 	public String getUser_id() {
 		return user_id;
 	}
